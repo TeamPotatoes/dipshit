@@ -9,8 +9,8 @@ public class Movement : MonoBehaviour {
     public Animator anim;
     private float inputH;
     private Transform tr;
-    private bool FacingRight = true;
- 
+    private bool FacingForward = true;
+
     void Start()
 
     {
@@ -24,22 +24,45 @@ public class Movement : MonoBehaviour {
         {
         anim.Play("walking", -1, 0f);
         }
-        
-   //    inputH = Input.GetAxis("Horizontal");
-   //   anim.SetFloat("inputH", inputH);
 
-        
+
+        //    inputH = Input.GetAxis("Horizontal");
+        //   anim.SetFloat("inputH", inputH);
+
+
     }
 
     // Update is called once per frame
-    void FixedUpdate ()
+    void FixedUpdate()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         Vector3 movement = new Vector3(moveHorizontal, 0, 0);
         rb.AddForce(movement * speed);
+
         if (speed >= 20)
         {
             speed = 10;
-        }  
-    }
+        }
+        if (Input.GetKey(KeyCode.RightArrow)&& FacingForward == false)
+          {
+              tr.Rotate(0, 180, 0);
+            FacingForward = true;
+          }
+        else
+        {
+            tr.Rotate(0, 0, 0);
+        }
+          if (Input.GetKey(KeyCode.LeftArrow) && FacingForward == true)
+          {
+              tr.Rotate(0, -180, 0);
+              FacingForward = false;
+
+          }
+          else
+        {
+            tr.Rotate(0, 0, 0);
+        }
+      }
 }
+
+//if (Input.GetKeyDown(KeyCode.RightArrow) && FacingForward = true)
