@@ -6,7 +6,6 @@ public class Movement : MonoBehaviour {
     private float moveHorizontal;
     private Rigidbody rb;
     public float speed;
-    public Animator anim;
     private float inputH;
     private Transform tr;
     private bool FacingForward = true;
@@ -16,20 +15,10 @@ public class Movement : MonoBehaviour {
     {
         tr = GetComponent<Transform>();
         rb = GetComponent<Rigidbody>();
-        anim = GetComponent<Animator>();
     }
     void Update()
     {
-        if (Input.GetButtonDown("Horizontal"))
-        {
-        anim.Play("walking", -1, 0f);
-        }
-
-
-        //    inputH = Input.GetAxis("Horizontal");
-        //   anim.SetFloat("inputH", inputH);
-
-
+        
     }
 
     // Update is called once per frame
@@ -39,6 +28,7 @@ public class Movement : MonoBehaviour {
         Vector3 movement = new Vector3(moveHorizontal, 0, 0);
         rb.AddForce(movement * speed);
 
+        //ЭТУ ХЕРНЮ НАДО УБРАТЬ, НАДО ПОНОРМАЛЬНОМУ ОГРАНИЧИТЬ МАКС СКОРОСТЬ
         if (speed >= 20)
         {
             speed = 10;
