@@ -12,13 +12,16 @@ public class Player_animation : MonoBehaviour {
 	void Update () {
         if (Input.GetButtonDown("Jump") && GetComponent<Jump>().grounded == true)
         {
-            anim.Play("jump", -1, 0f);
+            anim.Play("jump_stay", -1, 0f);
         }
         if (Input.GetButtonDown("Horizontal"))
         {
-            anim.Play("walking", -1, 0f);
+            anim.Play("running", -1, 0f);
         }
-
+        if (Input.GetButtonDown("Horizontal") && Input.GetButtonDown("Jump") && GetComponent<Jump>().grounded == true)
+        {
+            anim.Play("running_jump", -1, 0f);
+        }
 
         //    inputH = Input.GetAxis("Horizontal");
         //   anim.SetFloat("inputH", inputH);
