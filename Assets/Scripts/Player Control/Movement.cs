@@ -5,34 +5,34 @@ public class Movement : MonoBehaviour {
 
     private float moveHorizontal;
     private Rigidbody rb;
-    public float speed;
-    private float inputH;
+    private int speed = 25;
     private Transform tr;
     private bool FacingForward = true;
+    private bool FacingUp = true;
+    private GameObject Player;
 
     void Start()
 
     {
+        Player = (GameObject)this.gameObject;
         tr = GetComponent<Transform>();
         rb = GetComponent<Rigidbody>();
     }
+
+
+
     void Update()
     {
-        
+        if (Input.GetButton("Horizontal"))
+        {
+            Player.transform.position += Player.transform.forward * speed * Time.deltaTime;
+        }
+
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        Vector3 movement = new Vector3(moveHorizontal, 0, 0);
-        rb.AddForce(movement * speed);
 
-        //ЭТУ ХЕРНЮ НАДО УБРАТЬ, НАДО ПОНОРМАЛЬНОМУ ОГРАНИЧИТЬ МАКС СКОРОСТЬ
-        if (speed >= 20)
-        {
-            speed = 10;
-        }
+    void FixedUpdate()
+    {  
         if (Input.GetKey(KeyCode.RightArrow)&& FacingForward == false)
           {
               tr.Rotate(0, 180, 0);
@@ -48,11 +48,13 @@ public class Movement : MonoBehaviour {
               FacingForward = false;
 
           }
+          
           else
         {
             tr.Rotate(0, 0, 0);
         }
-      }
+      
+
+    }
 }
 
-//if (Input.GetKeyDown(KeyCode.RightArrow) && FacingForward = true)
