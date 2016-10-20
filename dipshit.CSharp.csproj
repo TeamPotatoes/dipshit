@@ -61,12 +61,25 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Common">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Player Control\Jump.cs" />
     <Compile Include="Assets\Scripts\Player Control\Movement.cs" />
     <Compile Include="Assets\Scripts\Player_Camera.cs" />
     <Compile Include="Assets\Scripts\Player_animation.cs" />
+    <Compile Include="Assets\Scripts\UIMain\Exit.cs" />
+    <Compile Include="Assets\Scripts\UIMain\Startgame.cs" />
+    <Compile Include="Assets\Textures\Campfire Pack\Script\SwitchView.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Textures\Day-Night Skyboxes\Textures\Readme for Assigning.txt" />
+    <None Include="Assets\Textures\Day-Night Skyboxes\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
