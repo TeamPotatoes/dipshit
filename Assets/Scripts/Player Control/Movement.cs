@@ -3,12 +3,10 @@ using System.Collections;
 
 public class Movement : MonoBehaviour {
 
-    private float moveHorizontal;
-    private Rigidbody rb;
+
     private int speed = 25;
     private Transform tr;
     private bool FacingForward = true;
-    private bool FacingUp = true;
     private GameObject Player;
 
     void Start()
@@ -16,13 +14,16 @@ public class Movement : MonoBehaviour {
     {
         Player = (GameObject)this.gameObject;
         tr = GetComponent<Transform>();
-        rb = GetComponent<Rigidbody>();
     }
 
 
 
     void Update()
     {
+        if (Input.GetKey(KeyCode.R))
+        {
+            Destroy(Player);
+        }
         if (Input.GetButton("Horizontal"))
         {
             Player.transform.position += Player.transform.forward * speed * Time.deltaTime;
