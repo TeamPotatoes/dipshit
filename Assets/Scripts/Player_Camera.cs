@@ -17,7 +17,7 @@ public class Player_Camera : MonoBehaviour
      void Start()
      {
 
-        transform.LookAt(target);
+        
         offset = Player.transform.position ;// - Player.transform.position;
 
     }
@@ -29,8 +29,8 @@ public class Player_Camera : MonoBehaviour
     // Update is called once per frame
     void LateUpdate ()
     {
-
-        transform.RotateAround(offset, Vector3.up, 20 * Time.deltaTime);
+        transform.LookAt(target);
+       // transform.RotateAround(offset, Vector3.up, 20 * Time.deltaTime);
 
         // transform.position = Player.transform.position + offset; 
     }

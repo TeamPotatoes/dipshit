@@ -35,7 +35,7 @@ public class Movement : MonoBehaviour {
         {
             Player.transform.position -= Player.transform.forward * speed * Time.deltaTime;
         }
-        //поворотна право и на лево
+        //поворот направо и налево
           if(Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.LeftArrow))
         {
             Player.transform.Rotate(0, -5, 0);
@@ -45,7 +45,7 @@ public class Movement : MonoBehaviour {
             Player.transform.Rotate(0, 5, 0);
         }
 
-        //Движения в бок
+        //Движения вбок
          if (Input.GetKey(KeyCode.D))
          {
             Player.transform.position += Player.transform.right * speed2 * Time.deltaTime;
