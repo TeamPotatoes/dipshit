@@ -1,26 +1,40 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player_Camera : MonoBehaviour {
+
+public class Player_Camera : MonoBehaviour
+{
+
+
 
     public GameObject Player;
+   // private float speedMod = 10.0f;
     private Vector3 offset;
-    private Vector3  Position;
-    //public Transform target;
+    public Transform target;
 
 
-	// Use this for initialization
-	void Start ()
-    {
-       // Position = transform.TransformPoint(Vector3.right * 2);
-       // Instantiate(Player, Position, Player.transform.rotation);
-        offset = transform.position - Player.transform.position;
+     // Use this for initialization
+     void Start()
+     {
+
+        transform.LookAt(target);
+        offset = Player.transform.position ;// - Player.transform.position;
+
     }
-	
-	// Update is called once per frame
-	void LateUpdate ()
+    void Update()
     {
-        //transform.LookAt(target);
-       transform.position = Player.transform.position + offset;
+  
     }
+
+    // Update is called once per frame
+    void LateUpdate ()
+    {
+
+        transform.RotateAround(offset, Vector3.up, 20 * Time.deltaTime);
+
+        // transform.position = Player.transform.position + offset; 
+    }
+
 }
+
+
