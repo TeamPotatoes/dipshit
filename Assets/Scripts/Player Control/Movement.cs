@@ -9,11 +9,13 @@ public class Movement : MonoBehaviour {
   //  private bool FacingForward = true;
     private GameObject Player;
     private int speed2 = 5; //Скорость движения вбок
+    public bool run; //Залог для будущего бега
 
     void Start()
 
     {
         Player = (GameObject)this.gameObject;
+        run = false; //на старте не бежим
       //  tr = GetComponent<Transform>();
     }
 
@@ -54,7 +56,15 @@ public class Movement : MonoBehaviour {
         {
             Player.transform.position -= Player.transform.right * speed2 * Time.deltaTime;
         }
-
+        //Залог для бега
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            run = true;
+        }
+        else
+        {
+            run = false;
+        }
     }
 
 
