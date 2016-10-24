@@ -3,27 +3,28 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class Startgame : MonoBehaviour {
 
-    
+public class Startgame : MonoBehaviour
+{
+
+
     public Button StartGame;
-    private GameObject UImain;
+    private GameObject UIMain;
+    private Events Ev;
 
-
-
-    void Start ()
+    void Start()
     {
-        UImain = (GameObject)this.gameObject;
-       Button SG = StartGame.GetComponent<Button>();
+        Ev = GetComponent<Events>();
+        UIMain = (GameObject)this.gameObject;
+        Button SG = StartGame.GetComponent<Button>();
         SG.onClick.AddListener(TaskOnClick);
-	}
+    }
 
     void TaskOnClick()
     {
-        UImain.SetActive(false);
-
+        UIMain.SetActive(false);
+        Ev.UImainActive = false;
     }
-    
-
-	
+   
 }
+       

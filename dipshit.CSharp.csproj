@@ -67,15 +67,14 @@
     <Reference Include="UnityEditor.iOS.Extensions.Common">
       <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Assembly-UnityScript-firstpass">
-      <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Player Control\Jump.cs" />
+    <Compile Include="Assets\Scripts\Player Control\MouseLook.cs" />
     <Compile Include="Assets\Scripts\Player Control\Movement.cs" />
     <Compile Include="Assets\Scripts\Player_Camera.cs" />
     <Compile Include="Assets\Scripts\Player_animation.cs" />
+    <Compile Include="Assets\Scripts\UIMain\Events.cs" />
     <Compile Include="Assets\Scripts\UIMain\Exit.cs" />
     <Compile Include="Assets\Scripts\UIMain\Startgame.cs" />
     <Compile Include="Assets\Textures\Campfire Pack\Script\SwitchView.cs" />
