@@ -8,8 +8,8 @@ public class Movement : MonoBehaviour {
   // private Transform tr;
   //  private bool FacingForward = true;
     private GameObject Player;
-    private int speed2 = 5; //Скорость движения вбок
-    public bool run; //Залог для будущего бега
+    private int speed2 = 8; //Скорость движения вбок
+    public bool run; //быстрый бег, переменная задействована в аниматоре
 
     void Start()
 
@@ -56,14 +56,16 @@ public class Movement : MonoBehaviour {
         {
             Player.transform.position -= Player.transform.right * speed2 * Time.deltaTime;
         }
-        //Залог для бега
+        //Быстрый бег (надо скорректировать)
         if(Input.GetKey(KeyCode.LeftShift))
         {
             run = true;
+            speed = 30;
         }
         else
         {
             run = false;
+            speed = 15;
         }
     }
 
