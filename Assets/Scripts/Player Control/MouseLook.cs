@@ -27,13 +27,11 @@ public class MouseLook : MonoBehaviour {
 
 	public float minimumY = -60F;
 	public float maximumY = 60F;
-    public Transform tarfget;
 
 	float rotationY = 0F;
 
 	void Update ()
 	{
-        transform.LookAt(tarfget);
 		if (axes == RotationAxes.MouseXAndY)
 		{
 			float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
