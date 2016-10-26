@@ -1,31 +1,41 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 
 public class Events : MonoBehaviour
 {
-    public GameObject UIMain;
-    public bool UImainActive = true;
-
+    private GameObject UIMain;
+    private bool UImainActive = true;
+    private float UI;
 
     // Use this for initialization
     void Start()
     {
+
         UIMain = (GameObject)this.gameObject;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if (Input.GetButtonDown("Cancel") && UImainActive == true)
+        if (Input.GetKeyDown(KeyCode.Escape) && UImainActive == true)
         {
             UIMain.SetActive(false);
             UImainActive = false;
         }
-        if (Input.GetButtonDown("Cancel") && UImainActive == false)
+        else
+        {
+           UImainActive = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Escape) && UImainActive == false)
         {
             UIMain.SetActive(true);
-            UImainActive = true;
+             UImainActive = true; 
+        }
+        else
+        {
+            UImainActive = false;
         }
     }
 }
