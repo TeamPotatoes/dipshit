@@ -10,11 +10,11 @@ public class Startgame : MonoBehaviour
 
     public Button StartGame;
     private GameObject UIMain;
-    private Events Ev;
+  //  private Events Ev;
 
     void Start()
     {
-        Ev = GetComponent<Events>();
+       // Ev = GetComponent<Events>();
         UIMain = (GameObject)this.gameObject;
         Button SG = StartGame.GetComponent<Button>();
         SG.onClick.AddListener(TaskOnClick);
@@ -23,7 +23,7 @@ public class Startgame : MonoBehaviour
     void TaskOnClick()
     {
         UIMain.SetActive(false);
-        Ev.UImainActive = false;
+       // Ev.UImainActive = false;
     }
    
 }

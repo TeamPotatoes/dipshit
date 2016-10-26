@@ -11,6 +11,7 @@ public class Movement : MonoBehaviour {
     private int speed2 = 8; //Скорость движения вбок
     public bool run; //быстрый бег, переменная задействована в аниматоре
 
+
     void Start()
 
     {
@@ -23,6 +24,7 @@ public class Movement : MonoBehaviour {
 
     void Update()
     {
+
         // Суицид:)
         if (Input.GetKey(KeyCode.R))
         {
