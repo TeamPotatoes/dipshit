@@ -1,28 +1,34 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 //СКРИПТ ОТОБРАЖАЕТ ВСПЛЫВАЮЩИЕ ТЕКСТЫ ЕСЛИ К НИМ БЛИЗКО ПОДОЙТИ
 public class Show_text : MonoBehaviour {
-    public GameObject message;
+    private GameObject message;
+    private GameObject Player;
     void Start()
     {
+       
+        Player = (GameObject)this.gameObject;
         if (message == null)
         {
-            message = GameObject.FindWithTag("PopUp");
+            message = GameObject.FindGameObjectWithTag("PopUp");
         }
         
     }
-        
+
     void Update()
     {
-        if ((message.transform.position - this.transform.position).sqrMagnitude < 5 * 5)
+        if ((message.transform.position - Player.transform.position).sqrMagnitude < 60)
         {
             message.SetActive(true);
         } else
         {
-            message.SetActive(false);     
+              message.SetActive(false);     
         }
         //foreach (GameObject.FindGameObjectWithTag("PopUp"))
          //   { }
     }
+    
+            
 }
