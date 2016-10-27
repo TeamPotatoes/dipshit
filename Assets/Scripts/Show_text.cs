@@ -6,13 +6,13 @@ using UnityEngine.UI;
 public class Show_text : MonoBehaviour {
        
     public GameObject[] ShowMe; //Эта штука в инспекторе (в скрипте) при старте игры, отобразит все объекты с тэгом PopUp. Кусочек кода для работы есть в Update.
-    
+
     void Start()
     {
-                     
+        
     }
 
-    void Update()
+    void LateUpdate()
     {
         ShowMe = GameObject.FindGameObjectsWithTag("PopUp"); // тот самый кусочек кода
         
@@ -30,16 +30,16 @@ public class Show_text : MonoBehaviour {
                     distance = curdistance; 
                 }
             }
-           
-        
+
+                  
          if ((closest.transform.position - transform.position).sqrMagnitude < 60)
         {
-            print("You're close!"); // эта штука отображает в консоли инфу - далеко ты или близко от объекта с тэгом popup. Значит скрипт работает
-            //closest.SetActive(true); - это не пойдет, т.к. оно выключает объекты и весь смысл кода выше летит к херам. Надо найти альтернативу включению
+            closest.GetComponent<Canvas>().enabled = true;
+            
         } else 
         {
-            print("You're far!");
-             //closest.SetActive(false);     
+            closest.GetComponent<Canvas>().enabled = false;
+               
          }
        
     }
