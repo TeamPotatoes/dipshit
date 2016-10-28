@@ -128,31 +128,5 @@ void LateUpdate()
         }
         
     }
-
-
-    
-       /* if (Input.GetKey(KeyCode.W)&& FacingForward == false)
-          {
-              tr.Rotate(0, 180, 0);
-            FacingForward = true;
-          }
-        else
-        {
-            tr.Rotate(0, 0, 0);
-        }
-          if (Input.GetKey(KeyCode.S) && FacingForward == true)
-          {
-              tr.Rotate(0, -180, 0);
-              FacingForward = false;
-
-          }
-          
-          else
-        {
-            tr.Rotate(0, 0, 0);
-        }*/
-      
-
-    
 }
 

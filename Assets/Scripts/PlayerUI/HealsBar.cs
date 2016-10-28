@@ -7,7 +7,11 @@ public class HealsBar : MonoBehaviour {
     private float BarWidth;
     private float realHeals;
     private float TextureWidth;
-
+    public GameObject[] Fire;
+    private int dmg = 7;
+    private int heal = 3;
+    public GameObject Player;
+    private bool playerInjured;
 
     // Use this for initialization
     void Start ()
@@ -15,7 +19,7 @@ public class HealsBar : MonoBehaviour {
         BarWidth = Screen.width / 4;
         realHeals = MaxHeals;
         TextureWidth = BarWidth;
-
+        playerInjured = false;
        
 
     }
@@ -34,8 +38,45 @@ public class HealsBar : MonoBehaviour {
 
     
     // Update is called once per frame
-    void FixedUpdate () {
-     
+    void LateUpdate ()
+    {
+        Fire = GameObject.FindGameObjectsWithTag("StaticFire");
 
+        GameObject[] signs;
+        signs = GameObject.FindGameObjectsWithTag("StaticFire");
+        GameObject closest = null;
+        float distance = Mathf.Infinity;
+        foreach (GameObject sign in signs)
+        {
+            Vector3 diff = sign.transform.position - transform.position;
+            float curdistance = diff.sqrMagnitude;
+            if (curdistance < distance)
+            {
+                closest = sign;
+                distance = curdistance;
+            }
+        }
+
+      
+        if ((closest.transform.position - Player.transform.position).sqrMagnitude < 60 && realHeals <= 1000)
+        {
+            realHeals = realHeals - dmg;
+            playerInjured = true;
+        }
+       
+        if(realHeals >= 1 && playerInjured == true)
+        {
+            realHeals = realHeals + heal;
+
+        }
+        if (realHeals >= 1000)
+        {
+            playerInjured = false;
+            realHeals = 1000;
+        }
+        if (realHeals <= 0)
+        {
+            Destroy(Player);
+        }
     }
 }
