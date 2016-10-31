@@ -4,17 +4,18 @@ using System.Collections;
 public class Movement : MonoBehaviour {
 
 
-    public int speed = 15; //Скорость движения вперед/назад
+    private int speed = 15; //Скорость движения вперед/назад
     private GameObject Player;
     private int speed2 = 8; //Скорость движения вбок
     public bool run; //быстрый бег, переменная задействована в аниматоре
+    private bool sprintState;
 
    //Переменные для стамины
     public float MaxStamina = 100;
     public int tired = 1; //это когда заебался
     public float realStamina;// а про это я вообще молчу
     public int fatigue = 1; // это когда еще не заебался
-
+ 
 
     void Start()
 
@@ -23,8 +24,11 @@ public class Movement : MonoBehaviour {
   
         realStamina = MaxStamina;
         Player = (GameObject)this.gameObject;
-        run = false; //отображает возможность спринта в данный момент
-      
+        sprintState = true;
+        run = false;
+            
+
+
     }
 
 
@@ -35,26 +39,28 @@ public class Movement : MonoBehaviour {
 void LateUpdate()
     {
         //Если спринт, стамина уменьшается
-        if (speed == 30 && realStamina > 0)
+        if (run == true && realStamina > 0  && Input.GetKey(KeyCode.W))
         {
             realStamina = realStamina - fatigue;
+           
         }
 
         //если НЕ спринт, стамину увеличивается
-        if (speed == 15 && realStamina < 100 || speed == 0 && realStamina < 100)
+        if (run == false && realStamina < 100)
         {
             realStamina = realStamina + tired;
+        
+
         }
         
 
-    //!!!!!!!!!!!!!!!!! ЭТОТ КОД ХЕРИТ СМЫСЛ ПАРАМЕТРА RUN. ПОЛУЧАЕТСЯ ЧТО ОН ВСЕГДА ВРУБЛЕН И ПЕРСОНАЖ ВСЕГДА БЕЖИТ. САМ ЗАМЕТИЛ ТОЛЬКО КОГДА ВРУБИЛ УСКОРЕНИЕ АНИМАЦИИ
         if(realStamina <= 0)
       {
-          run = false;
+            sprintState = false;
       }
-        if (realStamina >= 30)
+        if (realStamina >= 70)
        {
-            run = true;
+            sprintState = true;
        }
    
     }
@@ -99,19 +105,19 @@ void LateUpdate()
             Player.transform.position -= Player.transform.right * speed2 * Time.deltaTime;
         }
         //Быстрый бег (надо скорректировать)
-        if(Input.GetKey(KeyCode.LeftShift) && run == true)
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W) && sprintState == true)
         {
-          
-            speed = 30;
+            run = true;
+            speed = 30; // режим, больного туберкулезом, бомжа наркомана
+           // speed = speed * 2; // Режим флеша
             
         }
         else
         {
-           
+            run = false;
             speed = 15;
-            
+
         }
-        
     }
 }
 
