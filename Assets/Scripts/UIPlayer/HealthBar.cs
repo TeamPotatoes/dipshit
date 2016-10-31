@@ -7,8 +7,8 @@ public class HealthBar : MonoBehaviour {
     private float BarWidth;
     private float RealHealth;
     private float TextureWidth;
-    private int dmg = 7;
-    private int regen = 3;
+    public int dmg = 7;
+    public int regen = 3;
     public GameObject Player;
     private bool playerInjured;
 
