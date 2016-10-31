@@ -13,7 +13,7 @@ public class Player_animation : MonoBehaviour {
     void Start () {
         anim = GetComponent<Animator>();
         source = GetComponent<AudioSource>();
-        
+        anim.speed = 1.0f;
     }
     
 	// Update is called once per frame
@@ -36,5 +36,14 @@ public class Player_animation : MonoBehaviour {
         anim.SetFloat("inputFronts", inputFronts);
         //anim.SetFloat("inptTurns", inputTurns);
         anim.SetBool("run", GetComponent<Movement>().run);
+        // временный костыль ускоряющий анимацию если игрок бежит
+        if (GetComponent<Movement>().run == true)
+        {
+            anim.speed = 1.5f;
+        }
+        if (GetComponent<Movement>().run == false)
+        {
+            anim.speed = 1.0f;
+        }
     }
 }

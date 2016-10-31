@@ -30,6 +30,8 @@ public class MouseLook : MonoBehaviour {
 
 	float rotationY = 0F;
 
+    public GameObject Player;
+
 	void Update ()
 	{
 		if (axes == RotationAxes.MouseXAndY)

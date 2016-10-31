@@ -1,15 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HealsBar : MonoBehaviour {
-    public float MaxHeals = 1000;
-    public Texture Heals;
+public class HealthBar : MonoBehaviour {
+    public float MaxHealth = 1000;
+    public Texture Health;
     private float BarWidth;
-    private float realHeals;
+    private float RealHealth;
     private float TextureWidth;
-    public GameObject[] Fire;
     private int dmg = 7;
-    private int heal = 3;
+    private int regen = 3;
     public GameObject Player;
     private bool playerInjured;
 
@@ -17,7 +16,7 @@ public class HealsBar : MonoBehaviour {
     void Start ()
     {
         BarWidth = Screen.width / 4;
-        realHeals = MaxHeals;
+        RealHealth = MaxHealth;
         TextureWidth = BarWidth;
         playerInjured = false;
        
@@ -26,22 +25,17 @@ public class HealsBar : MonoBehaviour {
 
     void OnGUI()
     {
-      
-        GUI.Box(new Rect(10, 10, BarWidth, 40), MaxHeals + " of " + realHeals);
-
-        if (Heals != null && TextureWidth > 0)
+        if (Health != null && TextureWidth > 0)
         {
-            GUI.DrawTexture(new Rect(10, 30, TextureWidth, 15), Heals, ScaleMode.ScaleAndCrop, true, 10.0f);
+            GUI.DrawTexture(new Rect(10, 12, TextureWidth, 15), Health, ScaleMode.ScaleAndCrop, true, 10.0f);
         }
+        GUI.Box(new Rect(10, 10, BarWidth, 20), MaxHealth + " of " + RealHealth);
     }
 
 
     
-    // Update is called once per frame
     void LateUpdate ()
     {
-        Fire = GameObject.FindGameObjectsWithTag("StaticFire");
-
         GameObject[] signs;
         signs = GameObject.FindGameObjectsWithTag("StaticFire");
         GameObject closest = null;
@@ -57,24 +51,24 @@ public class HealsBar : MonoBehaviour {
             }
         }
 
-      
-        if ((closest.transform.position - Player.transform.position).sqrMagnitude < 60 && realHeals <= 1000)
+      //УРОН ПЕРОСНАЖУ ОТ ИСТОЧНИКА ОГНЯ
+        if ((closest.transform.position - Player.transform.position).sqrMagnitude < 10 && RealHealth <= 1000)
         {
-            realHeals = realHeals - dmg;
+            RealHealth = RealHealth - dmg;
             playerInjured = true;
         }
        
-        if(realHeals >= 1 && playerInjured == true)
+        if(RealHealth >= 1 && playerInjured == true)
         {
-            realHeals = realHeals + heal;
+            RealHealth = RealHealth + regen;
 
         }
-        if (realHeals >= 1000)
+        if (RealHealth >= 1000)
         {
             playerInjured = false;
-            realHeals = 1000;
+            RealHealth = 1000;
         }
-        if (realHeals <= 0)
+        if (RealHealth <= 0)
         {
             Destroy(Player);
         }

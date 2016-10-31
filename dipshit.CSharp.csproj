@@ -61,24 +61,19 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
-      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Common">
-      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Camera\MouseOrbitRotation.cs" />
     <Compile Include="Assets\Scripts\Player Control\Jump.cs" />
     <Compile Include="Assets\Scripts\Player Control\MouseLook.cs" />
     <Compile Include="Assets\Scripts\Player Control\Movement.cs" />
-    <Compile Include="Assets\Scripts\PlayerUI\HealsBar.cs" />
-    <Compile Include="Assets\Scripts\Player_Camera.cs" />
     <Compile Include="Assets\Scripts\Player_animation.cs" />
     <Compile Include="Assets\Scripts\Show_text.cs" />
     <Compile Include="Assets\Scripts\UIMain\Events.cs" />
     <Compile Include="Assets\Scripts\UIMain\Exit.cs" />
     <Compile Include="Assets\Scripts\UIMain\Startgame.cs" />
+    <Compile Include="Assets\Scripts\UIPlayer\HealthBar.cs" />
+    <Compile Include="Assets\Scripts\UIPlayer\StaminaBar.cs" />
     <Compile Include="Assets\Scripts\door_animation.cs" />
     <Compile Include="Assets\Textures\Campfire Pack\Script\SwitchView.cs" />
     <Compile Include="Assets\Textures\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Scripts\Antialiasing.cs" />
