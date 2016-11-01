@@ -2,15 +2,15 @@
 using System.Collections;
 
 public class HealthBar : MonoBehaviour {
-    public float MaxHealth = 1000;
+    public float MaxHealth = 5000;
     public Texture Health;
     private float BarWidth;
-    private float RealHealth;
+    public float RealHealth;
     private float TextureWidth;
-    public int dmg = 7;
+    public int dmg = 1;
     public int regen = 3;
     public GameObject Player;
-    private bool playerInjured;
+    public bool playerInjured;
 
     // Use this for initialization
     void Start ()
@@ -52,9 +52,13 @@ public class HealthBar : MonoBehaviour {
         }
 
       //УРОН ПЕРОСНАЖУ ОТ ИСТОЧНИКА ОГНЯ
-        if ((closest.transform.position - Player.transform.position).sqrMagnitude < 10 && RealHealth <= 1000)
+       /* if ((closest.transform.position - Player.transform.position).sqrMagnitude < 10 && RealHealth <= 1000)
         {
             RealHealth = RealHealth - dmg;
+            playerInjured = true;
+        } */
+        if(RealHealth >= 1)
+        {
             playerInjured = true;
         }
        
@@ -63,10 +67,10 @@ public class HealthBar : MonoBehaviour {
             RealHealth = RealHealth + regen;
 
         }
-        if (RealHealth >= 1000)
+        if (RealHealth >= 5000)
         {
             playerInjured = false;
-            RealHealth = 1000;
+            RealHealth = 5000;
         }
         if (RealHealth <= 0)
         {
