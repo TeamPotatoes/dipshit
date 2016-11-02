@@ -29,13 +29,15 @@ public class HealthBar : MonoBehaviour {
         {
             GUI.DrawTexture(new Rect(10, 12, TextureWidth, 15), Health, ScaleMode.ScaleAndCrop, true, 10.0f);
         }
-        GUI.Box(new Rect(10, 10, BarWidth, 20), MaxHealth + " of " + RealHealth);
+        GUI.Box(new Rect(10, 10, BarWidth, 20), RealHealth + " of " + MaxHealth);
+        TextureWidth = RealHealth / MaxHealth * BarWidth;
     }
 
 
     
     void LateUpdate ()
     {
+        
         GameObject[] signs;
         signs = GameObject.FindGameObjectsWithTag("StaticFire");
         GameObject closest = null;
@@ -52,11 +54,11 @@ public class HealthBar : MonoBehaviour {
         }
 
       //УРОН ПЕРОСНАЖУ ОТ ИСТОЧНИКА ОГНЯ
-       /* if ((closest.transform.position - Player.transform.position).sqrMagnitude < 10 && RealHealth <= 1000)
+        if ((closest.transform.position - Player.transform.position).sqrMagnitude < 10 && RealHealth <= MaxHealth)
         {
             RealHealth = RealHealth - dmg;
             playerInjured = true;
-        } */
+        } 
         if(RealHealth >= 1)
         {
             playerInjured = true;
