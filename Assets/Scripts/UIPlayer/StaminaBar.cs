@@ -23,7 +23,8 @@ public class StaminaBar : MonoBehaviour {
         {
             GUI.DrawTexture(new Rect(10, 32, textureWidth, 15), Stamina, ScaleMode.ScaleAndCrop, true, 10.0F);// размещает текстуру на екране. 750 и 550 это кординанты экрана, остально размер и далее выбор самой текстуры способ заполнения пространства.
         }
-        GUI.Box(new Rect(10, 30, textureWidth, 20), realStamina_check + " of " + MaxStamina_check);
+        GUI.Box(new Rect(10, 30, BarWidth, 20), realStamina_check + " of " + MaxStamina_check);
+        textureWidth = realStamina_check / MaxStamina_check * BarWidth;
     }
     
   
