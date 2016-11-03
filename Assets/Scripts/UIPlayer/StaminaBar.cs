@@ -16,8 +16,8 @@ public class StaminaBar : MonoBehaviour {
 
     void OnGUI()
     {
-        float realStamina_check = Player.GetComponent<Movement>().realStamina;
-        float MaxStamina_check = Player.GetComponent<Movement>().MaxStamina;
+        float realStamina_check = Player.GetComponent<Player_stats>().realStamina;
+        float MaxStamina_check = Player.GetComponent<Player_stats>().MaxStamina;
         // создает маленький "канвас" черного цвета на екране. 750 и 530 это кординанты экрана, остально размер
         if (Stamina != null && textureWidth > 0)// если текстура стамины НЕ нулл и ее ширина больше 0
         {
@@ -27,10 +27,4 @@ public class StaminaBar : MonoBehaviour {
         textureWidth = realStamina_check / MaxStamina_check * BarWidth;
     }
     
-  
-
-    void Update()
-    {
-	
-	}
 }

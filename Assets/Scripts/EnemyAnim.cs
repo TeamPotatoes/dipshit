@@ -11,7 +11,7 @@ public class EnemyAnim : MonoBehaviour {
     private HealthBar RH;
     
 
-
+    /*
 	void Start ()
     {
      
@@ -75,4 +75,5 @@ public class EnemyAnim : MonoBehaviour {
     {
         
     } 
+    */
 }
