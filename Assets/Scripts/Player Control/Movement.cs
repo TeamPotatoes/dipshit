@@ -8,68 +8,67 @@ public class Movement : MonoBehaviour {
     private GameObject Player;
     private int speed2 = 8; //Скорость движения вбок
     public bool run; //быстрый бег, переменная задействована в аниматоре
-    private bool sprintState;
+    public bool sprintState;
 
    //Переменные для стамины
-    public float MaxStamina = 100;
-    public int tired = 1; //это когда заебался
-    public float realStamina;// а про это я вообще молчу
-    public int fatigue = 1; // это когда еще не заебался
- 
+
+    //Переменные для прыжка
+    public bool grounded = true;
+    public float JumpPower = 200;
+    private bool hasJump = false;
+    private Rigidbody rb;
 
     void Start()
 
     {
 
   
-        realStamina = MaxStamina;
         Player = (GameObject)this.gameObject;
         sprintState = true;
         run = false;
-            
+        rb = GetComponent<Rigidbody>(); //пока используется только в прыжке
 
 
     }
-
-
-
-
 
 
 void LateUpdate()
     {
-        //Если спринт, стамина уменьшается
-        if (run == true && realStamina > 0  && Input.GetKey(KeyCode.W))
-        {
-            realStamina = realStamina - fatigue;
-           
-        }
-
-        //если НЕ спринт, стамину увеличивается
-        if (run == false && realStamina < 100)
-        {
-            realStamina = realStamina + tired;
-        
-
-        }
-        
-
-        if(realStamina <= 0)
+        //ПРОВЕРКА СТАМИНЫ 
+        float realStamina_check = Player.GetComponent<Player_stats>().realStamina;
+        if (realStamina_check <= 0)
       {
             sprintState = false;
       }
-        if (realStamina >= 70)
+        if (realStamina_check >= 70)
        {
             sprintState = true;
        }
-   
     }
 
+    void FixedUpdate()
+    {
+        //Проверка прыжка
+        if (hasJump)
+        {
+            rb.AddForce(transform.up * JumpPower);
+            grounded = false;
+            hasJump = false;
+        }
+    }
     void Update()
     {
+        //проверка прыжка
+        if (!grounded && rb.velocity.y == 0)
+        {
+            grounded = true;
+        }
+        if (Input.GetButtonDown("Jump") && grounded == true)
+        {
+            hasJump = true;
+        }
 
- 
-       
+
 
         // Суицид:)
         if (Input.GetKey(KeyCode.R))
