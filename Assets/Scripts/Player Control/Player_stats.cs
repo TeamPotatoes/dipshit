@@ -25,7 +25,30 @@ public class Player_stats : MonoBehaviour {
     }
 
     void LateUpdate()
-    {        
+    {
+        //СТРОКИ СТАМИНЫ
+        bool run_check = Player.GetComponent<Movement>().run;
+        bool sprintState_check = Player.GetComponent<Movement>().sprintState;
+        if (run_check == true && realStamina > 0 && Input.GetKey(KeyCode.W))
+        {
+            realStamina = realStamina - fatigue;
+        }
+
+        //если НЕ спринт, стамина увеличивается
+        if (run_check == false && realStamina < MaxStamina)
+        {
+            realStamina = realStamina + tired;
+        }
+        if (realStamina <= 0)
+        {
+            sprintState_check = false;
+        }
+        if (realStamina >= 70)
+        {
+            sprintState_check = true;
+        }
+        //КОНЕЦ СТРОК СТАМИНЫ
+
         //УРОН ПЕРОСНАЖУ ОТ ИСТОЧНИКА ОГНЯ
         GameObject[] signs;
         signs = GameObject.FindGameObjectsWithTag("StaticFire");
@@ -56,38 +79,17 @@ public class Player_stats : MonoBehaviour {
             RealHealth = RealHealth + regen;
 
         }
-        if (RealHealth >= 5000)
+        if (RealHealth >= MaxHealth)
         {
             playerInjured = false;
-            RealHealth = 5000;
+            RealHealth = MaxHealth;
         }
         if (RealHealth <= 0)
         {
             Destroy(Player);
         }
 
-        //СТРОКИ СТАМИНЫ
-        bool run_check = Player.GetComponent<Movement>().run;
-        bool sprintState_check = Player.GetComponent<Movement>().sprintState;
-        if (run_check == true && realStamina > 0 && Input.GetKey(KeyCode.W))
-        {
-            realStamina = realStamina - fatigue;
-
-        }
-
-        //если НЕ спринт, стамину увеличивается
-        if (run_check == false && realStamina < 100)
-        {
-            realStamina = realStamina + tired;
-
-        }
-        if (realStamina <= 0)
-        {
-            sprintState_check = false;
-        }
-        if (realStamina >= 70)
-        {
-            sprintState_check = true;
-        }
+        
     }
+
 }
