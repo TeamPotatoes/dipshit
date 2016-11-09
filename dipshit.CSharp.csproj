@@ -61,10 +61,17 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Common">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Camera\MouseOrbitRotation.cs" />
     <Compile Include="Assets\Scripts\EnemyAnim.cs" />
+    <Compile Include="Assets\Scripts\Physic\PhysicCollision.cs" />
     <Compile Include="Assets\Scripts\Player Control\MouseLook.cs" />
     <Compile Include="Assets\Scripts\Player Control\Movement.cs" />
     <Compile Include="Assets\Scripts\Player Control\Player_animation.cs" />

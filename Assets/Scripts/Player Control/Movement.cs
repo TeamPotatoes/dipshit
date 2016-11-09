@@ -1,16 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 public class Movement : MonoBehaviour {
 
 
-    private int speed = 15; //Скорость движения вперед/назад
+    private float speed = 1; //Скорость движения вперед/назад
     private GameObject Player;
     private int speed2 = 8; //Скорость движения вбок
     public bool run; //быстрый бег, переменная задействована в аниматоре
     public bool sprintState;
+    private float maxSpeed = 15;
 
-   //Переменные для стамины
+
+    //Переменные для стамины
 
     //Переменные для прыжка
     public bool grounded = true;
@@ -22,13 +25,13 @@ public class Movement : MonoBehaviour {
 
     {
 
-  
         Player = (GameObject)this.gameObject;
         sprintState = true;
         run = false;
         rb = GetComponent<Rigidbody>(); //пока используется только в прыжке
 
-
+        rb.maxAngularVelocity = 1;
+     
     }
 
 
@@ -44,20 +47,38 @@ void LateUpdate()
        {
             sprintState = true;
        }
+        if(grounded == false)
+        {
+            rb.drag = 0;
+        }
+        else
+        {
+            rb.drag = 0;
+        }
+       
     }
-
-    void FixedUpdate()
+ 
+    /*void FixedUpdate()
     {
         //Проверка прыжка
         if (hasJump)
         {
-            rb.AddForce(transform.up * JumpPower);
+            rb.AddForce(Player.transform.up * JumpPower);
             grounded = false;
             hasJump = false;
         }
-    }
-    void Update()
+      
+
+        
+    }*/
+    void FixedUpdate()
     {
+        if (hasJump)
+        {
+            rb.AddForce(Player.transform.up * JumpPower);
+            grounded = false;
+            hasJump = false;
+        }
         //проверка прыжка
         if (!grounded && rb.velocity.y == 0)
         {
@@ -70,21 +91,25 @@ void LateUpdate()
 
 
 
-        // Суицид:)
-        if (Input.GetKey(KeyCode.R))
+      // Суицид:)
+       if (Input.GetKey(KeyCode.R))
         {
             Destroy(Player);
         }
         //движения вперед и назад
-        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+      if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             {
-            Player.transform.position += Player.transform.forward * speed * Time.deltaTime;
+
+           rb.AddForce(Player.transform.forward * 100);
+            
+            // Player.transform.position += Player.transform.forward * speed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
-            Player.transform.position -= Player.transform.forward * speed * Time.deltaTime;
+            rb.AddForce(-Player.transform.forward * 100);
+            //  Player.transform.position -= Player.transform.forward * speed * Time.deltaTime;
         }
-        //поворот направо и налево
+       ///поворот направо и налево
           if(Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.LeftArrow))
         {
             Player.transform.Rotate(0, -5, 0);
@@ -97,26 +122,36 @@ void LateUpdate()
         //Движения вбок
          if (Input.GetKey(KeyCode.D))
          {
-            Player.transform.position += Player.transform.right * speed2 * Time.deltaTime;
+            rb.AddForce(-Player.transform.right * 50);
+            //Player.transform.position += Player.transform.right * speed2 * Time.deltaTime;
          }
         if (Input.GetKey(KeyCode.A))
         {
-            Player.transform.position -= Player.transform.right * speed2 * Time.deltaTime;
+            rb.AddForce(Player.transform.right * 50);
+            //  Player.transform.position -= Player.transform.right * speed2 * Time.deltaTime;
         }
         //Быстрый бег (надо скорректировать)
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W) && sprintState == true)
         {
+            rb.AddForce(Player.transform.forward * 300);
             run = true;
-            speed = 30; // режим, больного туберкулезом, бомжа наркомана
+            maxSpeed = 300;
+          //  speed = 30; // режим, больного туберкулезом, бомжа наркомана
            // speed = speed * 2; // Режим флеша
             
         }
         else
         {
             run = false;
-            speed = 15;
+           // speed = 15;
+            maxSpeed = 15;
 
         }
+        if(rb.velocity.magnitude > maxSpeed && sprintState == true)
+        {
+          rb.velocity = rb.velocity.normalized * maxSpeed;
+        }
+
     }
 }
 
