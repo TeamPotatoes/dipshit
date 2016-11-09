@@ -7,7 +7,7 @@ public class Player_animation : MonoBehaviour {
     private AudioSource source;
     private float inputSides;
     private float inputFronts;
-    //private float inputTurns;
+    private float inputTurns;
 
     // Use this for initialization
     void Start () {
@@ -31,11 +31,12 @@ public class Player_animation : MonoBehaviour {
 
         inputSides = Input.GetAxis("Horizontal");
         inputFronts = Input.GetAxis("Vertical");
-        //inputTurns = transform.rotation.x; 
+        inputTurns = transform.rotation.y; 
         anim.SetFloat("inputSides", inputSides);
         anim.SetFloat("inputFronts", inputFronts);
-        //anim.SetFloat("inptTurns", inputTurns);
+        anim.SetFloat("inputTurns", inputTurns);
         anim.SetBool("run", GetComponent<Movement>().run);
+        anim.SetBool("stay", GetComponent<Movement>().stay);
         // временный костыль ускоряющий анимацию если игрок бежит
         if (GetComponent<Movement>().run == true)
         {
