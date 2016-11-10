@@ -9,6 +9,7 @@ public class Movement : MonoBehaviour {
     private GameObject Player;
     private int speed2 = 8; //Скорость движения вбок
     public bool run; //быстрый бег, переменная задействована в аниматоре
+    public bool stay; //стоит на месте персонаж, переменная задействована в аниматоре
     public bool sprintState;
     private float maxSpeed = 15;
 
@@ -57,7 +58,7 @@ void LateUpdate()
         }
        
     }
- 
+
     /*void FixedUpdate()
     {
         //Проверка прыжка
@@ -91,17 +92,17 @@ void LateUpdate()
 
 
 
-      // Суицид:)
-       if (Input.GetKey(KeyCode.R))
+        // Суицид:)
+        if (Input.GetKey(KeyCode.R))
         {
             Destroy(Player);
         }
         //движения вперед и назад
-      if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-            {
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        {
 
-           rb.AddForce(Player.transform.forward * 100);
-            
+            rb.AddForce(Player.transform.forward * 100);
+
             // Player.transform.position += Player.transform.forward * speed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
@@ -109,8 +110,8 @@ void LateUpdate()
             rb.AddForce(-Player.transform.forward * 100);
             //  Player.transform.position -= Player.transform.forward * speed * Time.deltaTime;
         }
-       ///поворот направо и налево
-          if(Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.LeftArrow))
+        ///поворот направо и налево
+        if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.LeftArrow))
         {
             Player.transform.Rotate(0, -5, 0);
         }
@@ -120,11 +121,11 @@ void LateUpdate()
         }
 
         //Движения вбок
-         if (Input.GetKey(KeyCode.D))
-         {
+        if (Input.GetKey(KeyCode.D))
+        {
             rb.AddForce(-Player.transform.right * 50);
             //Player.transform.position += Player.transform.right * speed2 * Time.deltaTime;
-         }
+        }
         if (Input.GetKey(KeyCode.A))
         {
             rb.AddForce(Player.transform.right * 50);
@@ -136,22 +137,27 @@ void LateUpdate()
             rb.AddForce(Player.transform.forward * 300);
             run = true;
             maxSpeed = 300;
-          //  speed = 30; // режим, больного туберкулезом, бомжа наркомана
-           // speed = speed * 2; // Режим флеша
-            
+            //  speed = 30; // режим, больного туберкулезом, бомжа наркомана
+            // speed = speed * 2; // Режим флеша
+
         }
         else
         {
             run = false;
-           // speed = 15;
+            // speed = 15;
             maxSpeed = 15;
 
         }
-        if(rb.velocity.magnitude > maxSpeed && sprintState == true)
+        if (rb.velocity.magnitude > maxSpeed && sprintState == true)
         {
-          rb.velocity = rb.velocity.normalized * maxSpeed;
+            rb.velocity = rb.velocity.normalized * maxSpeed;
         }
-
+        //ПРОВЕРКА ЧТО ПЕРСОНАЖ СТОИТ, МОДИФИЦИРУЙ ПОЖАЛУЙСТА
+        if (Input.GetAxis("Horizontal") <= 0 && Input.GetAxis("Vertical") <= 0)
+        {
+            stay = true;
+        }
+        else {stay = false;}
     }
 }
 
