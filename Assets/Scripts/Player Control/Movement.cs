@@ -10,16 +10,14 @@ public class Movement : MonoBehaviour {
     private int speed2 = 8; //Скорость движения вбок
     public bool run; //быстрый бег, переменная задействована в аниматоре
     public bool stay; //стоит на месте персонаж, переменная задействована в аниматоре
+    public float inputTurns;
     public bool sprintState;
     private float maxSpeed = 15;
-
-
-    //Переменные для стамины
 
     //Переменные для прыжка
     public bool grounded = true;
     public float JumpPower = 200;
-    private bool hasJump = false;
+    public bool hasJump = false; //также теперь используется в аниматоре
     private Rigidbody rb;
 
     void Start()
@@ -85,7 +83,7 @@ void LateUpdate()
         {
             grounded = true;
         }
-        if (Input.GetButtonDown("Jump") && grounded == true)
+        if (Input.GetButton("Jump") && grounded == true)
         {
             hasJump = true;
         }
@@ -111,14 +109,24 @@ void LateUpdate()
             //  Player.transform.position -= Player.transform.forward * speed * Time.deltaTime;
         }
         ///поворот направо и налево
-        if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.Q) && stay == true)
+        {            
+            //Player.transform.Rotate(0, -5, 0);
+            inputTurns = -1;
+        } else if (Input.GetKey(KeyCode.E) && stay == true)
         {
-            Player.transform.Rotate(0, -5, 0);
+            //Player.transform.Rotate(0, 5, 0);
+            inputTurns = 1;
+        } else { inputTurns = 0; }
+        if (Input.GetKey(KeyCode.Q) && stay == false)
+        {
+           Player.transform.Rotate(0, -5, 0);
         }
-        if (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.E) && stay == false)
         {
             Player.transform.Rotate(0, 5, 0);
         }
+       
 
         //Движения вбок
         if (Input.GetKey(KeyCode.D))
