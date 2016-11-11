@@ -31,12 +31,13 @@ public class Player_animation : MonoBehaviour {
 
         inputSides = Input.GetAxis("Horizontal");
         inputFronts = Input.GetAxis("Vertical");
-        inputTurns = transform.rotation.y; 
+        //inputTurns = transform.rotation.y; 
         anim.SetFloat("inputSides", inputSides);
         anim.SetFloat("inputFronts", inputFronts);
-        anim.SetFloat("inputTurns", inputTurns);
+        anim.SetFloat("inputTurns", GetComponent<Movement>().inputTurns);
         anim.SetBool("run", GetComponent<Movement>().run);
         anim.SetBool("stay", GetComponent<Movement>().stay);
+        anim.SetBool("jump", GetComponent<Movement>().hasJump);
         // временный костыль ускоряющий анимацию если игрок бежит
         if (GetComponent<Movement>().run == true)
         {
