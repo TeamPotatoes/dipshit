@@ -6,16 +6,18 @@ public class EnemyAnim : MonoBehaviour {
     public GameObject Skeleton;
     public float speed = 20;
     public Transform target;
-    public GameObject StatusBar;
+    public GameObject Player_stats;
     private bool patrol;
-    private HealthBar RH;
+    private Player_stats RH;
+    private Rigidbody rb;
     
 
-    /*
+    
 	void Start ()
     {
+        rb = GetComponent<Rigidbody>();
      
-        RH = StatusBar.GetComponent<HealthBar>();
+        RH = Player_stats.GetComponent<Player_stats>();
         patrol = true;
         anim = GetComponent<Animator>();
     }
@@ -49,13 +51,18 @@ public class EnemyAnim : MonoBehaviour {
 
         }
 
-        if ((closest.transform.position - Skeleton.transform.position).sqrMagnitude < 200000 && (closest.transform.position - Skeleton.transform.position).sqrMagnitude >= 51)
+        if ((closest.transform.position - Skeleton.transform.position).sqrMagnitude < 200 && (closest.transform.position - Skeleton.transform.position).sqrMagnitude >= 10)
         {
            // anim.SetFloat("RunAttack", 1);
             anim.Play("Run");
-            Skeleton.transform.position += Skeleton.transform.forward * speed * Time.deltaTime;
+            rb.AddForce(rb.transform.forward * 300);
+            //Skeleton.transform.position += Skeleton.transform.forward * speed * Time.deltaTime;
             transform.LookAt(target);
             patrol = false;
+        }
+        else
+        {
+            rb.AddForce(rb.transform.forward * 0);
         }
         
         if(patrol == true)
@@ -63,9 +70,10 @@ public class EnemyAnim : MonoBehaviour {
             anim.Play("Idle");
            // anim.SetFloat("RunAttack", -1);
         }
-        if ((closest.transform.position - Skeleton.transform.position).sqrMagnitude < 60)
+        if ((closest.transform.position - Skeleton.transform.position).sqrMagnitude < 20)
         {
             anim.Play("Attack");
+            transform.LookAt(target);
           //  anim.SetFloat("PlayerClose", 1);
         }
         
@@ -75,5 +83,5 @@ public class EnemyAnim : MonoBehaviour {
     {
         
     } 
-    */
+    
 }
