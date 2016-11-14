@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Movement : MonoBehaviour {
 
@@ -13,6 +14,8 @@ public class Movement : MonoBehaviour {
     public float inputTurns;
     public bool sprintState;
     private float maxSpeed = 15;
+    public Text HpPotionCount;
+    public int count;
 
     //Переменные для прыжка
     public bool grounded = true;
@@ -23,18 +26,28 @@ public class Movement : MonoBehaviour {
     void Start()
 
     {
-
+        count = 0;
+       
         Player = (GameObject)this.gameObject;
         sprintState = true;
         run = false;
         rb = GetComponent<Rigidbody>(); //пока используется только в прыжке
-
+        
         rb.maxAngularVelocity = 1;
      
     }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("HpPotion"))
+        {
+            other.gameObject.SetActive(false);
+            count = count + 1;
+        }
+    }
+        
 
 
-void LateUpdate()
+    void LateUpdate()
     {
         //ПРОВЕРКА СТАМИНЫ 
         float realStamina_check = Player.GetComponent<Player_stats>().realStamina;
@@ -167,5 +180,6 @@ void LateUpdate()
         }
         else {stay = false;}
     }
+    
 }
 
