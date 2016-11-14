@@ -74,11 +74,11 @@ public class Player_stats : MonoBehaviour {
             playerInjured = true;
         }
 
-        if (RealHealth >= 1 && playerInjured == true)
+    /*    if (RealHealth >= 1 && playerInjured == true)
         {
             RealHealth = RealHealth + regen;
 
-        }
+        }*/
         if (RealHealth >= MaxHealth)
         {
             playerInjured = false;
