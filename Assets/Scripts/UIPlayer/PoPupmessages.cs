@@ -4,53 +4,62 @@ using UnityEngine.UI;
 
 public class PoPupmessages : MonoBehaviour
 {
-    public Texture hpPotion;
-    public Texture staminaPotion;
-    private float BarWidth;
-    private Rect windowRect1 = new Rect(0, 380, 40, 60);
-    private Rect windowRect2 = new Rect(45, 380, 40, 60);
+   
     public GameObject Player;
-    private Rect PopHealth = new Rect(0, 0, 0, 0);
     private Player_stats PS;
-    private Movement MV;
     private int countCheck;
+    public int HPcount;
+    private GameObject HP;
+    private GameObject HPText;
+    private Text HPcountText;
+    public int frame;
 
-
-
-
-    void SetHpPointCountText()
+    public class WaitUntilExample : MonoBehaviour
     {
-        MV.HpPotionCount.text = countCheck.ToString();
+
+
 
     }
 
 
 
-    void Start()
+
+
+
+
+        void Start()
     {
-        
-        MV.count = 0;
-        SetHpPointCountText();
-        MV = Player.GetComponent<Movement>();
+      
+        PS = Player.GetComponent<Player_stats>();
+        HP = GameObject.Find("hp1");
+        HPText = GameObject.Find("hp1Text");
+        HP.SetActive(false);
+        HPcountText = HPText.GetComponent<Text>();
+        HPcount = 0;
+
+  
+      /*  MV = Player.GetComponent<Movement>();
         
         PS  = Player.GetComponent<Player_stats>();
-        countCheck = MV.count;
+        countCheck = count;*/
     
 
     }
+   
 
-
-    void OnGUI()
+    void OnTriggerEnter(Collider other)
     {
-     
-        GUI.Box(windowRect1, countCheck);
-        GUI.Box(windowRect2, "2");
-        GUI.DrawTexture(new Rect(0, 400, 40, 40), hpPotion);
-        GUI.DrawTexture(new Rect(45, 400, 40, 40), staminaPotion);
+        if (other.gameObject.CompareTag("HpPotion"))
+        {
+            Destroy(other.gameObject);
+            HPcount = HPcount + 1;
+            HP.SetActive(true);
+    
+            HPcountText.text = HPcount.ToString();
 
 
-
-
+        }
+      
     }
 
 
@@ -59,10 +68,18 @@ public class PoPupmessages : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PS.RealHealth <= 4999 && Input.GetKey(KeyCode.Keypad1))
+        if (Input.GetKey(KeyCode.Alpha1) && PS.RealHealth <= 4999 && HPcount >=1)
         {
-            PS.RealHealth = PS.RealHealth + 100;
+            PS.RealHealth = PS.RealHealth + 1000;
+            HPcount = HPcount - 1;
+            HPcountText.text = HPcount.ToString();
         }
+       if (HPcount == 0)
+        {
+            HP.SetActive(false);
+        }
+     
+
     }
  
 

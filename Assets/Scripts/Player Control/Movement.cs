@@ -14,8 +14,7 @@ public class Movement : MonoBehaviour {
     public float inputTurns;
     public bool sprintState;
     private float maxSpeed = 15;
-    public Text HpPotionCount;
-    public int count;
+
 
     //Переменные для прыжка
     public bool grounded = true;
@@ -26,7 +25,7 @@ public class Movement : MonoBehaviour {
     void Start()
 
     {
-        count = 0;
+
        
         Player = (GameObject)this.gameObject;
         sprintState = true;
@@ -36,14 +35,7 @@ public class Movement : MonoBehaviour {
         rb.maxAngularVelocity = 1;
      
     }
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("HpPotion"))
-        {
-            other.gameObject.SetActive(false);
-            count = count + 1;
-        }
-    }
+ 
         
 
 
