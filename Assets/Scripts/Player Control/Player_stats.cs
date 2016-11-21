@@ -4,15 +4,15 @@ using System.Collections;
 public class Player_stats : MonoBehaviour {
     public GameObject Player;
 
-    public float MaxHealth = 5000;
+    public int MaxHealth = 5000;
     [HideInInspector] public float RealHealth;
     public int dmg = 1;
-    public int regen = 1;
+    public float regen = 0.1f;
     public bool playerInjured;
     public float MaxStamina = 100;
     [HideInInspector] public float realStamina;
     public int fatigue = 1; // это когда еще не заебался
-    public int tired = 1; //это когда заебался
+    public float tired = 0.5f; //это когда заебался
     
     
 
@@ -74,11 +74,11 @@ public class Player_stats : MonoBehaviour {
             playerInjured = true;
         }
 
-    /*    if (RealHealth >= 1 && playerInjured == true)
+        if (RealHealth >= 1 && playerInjured == true)
         {
             RealHealth = RealHealth + regen;
 
-        }*/
+        }
         if (RealHealth >= MaxHealth)
         {
             playerInjured = false;
