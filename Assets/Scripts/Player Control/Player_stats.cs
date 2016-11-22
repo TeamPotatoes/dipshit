@@ -26,7 +26,7 @@ public class Player_stats : MonoBehaviour {
 
     void LateUpdate()
     {
-        //СТРОКИ СТАМИНЫ
+        //СТРОКИ СТАМИНЫ или нет?
         bool run_check = Player.GetComponent<Movement>().run;
         bool sprintState_check = Player.GetComponent<Movement>().sprintState;
         if (run_check == true && realStamina > 0 && Input.GetKey(KeyCode.W))
