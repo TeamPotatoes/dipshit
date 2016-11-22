@@ -5,7 +5,7 @@ using UnityEngine.UI;
 //СКРИПТ ОТОБРАЖАЕТ ВСПЛЫВАЮЩИЕ ТЕКСТЫ ЕСЛИ К НИМ БЛИЗКО ПОДОЙТИ
 public class Show_text : MonoBehaviour {
        
-    public GameObject[] ShowMe; // Инфа для себя, чтобы видеть в инспекторе сколько существует объектов с определенным тегом на сцене [УДАЛИТЬ ПОТОМ]
+   // public GameObject[] ShowMe; // Инфа для себя, чтобы видеть в инспекторе сколько существует объектов с определенным тегом на сцене [УДАЛИТЬ ПОТОМ]
 
     void Start()
     {
@@ -14,7 +14,7 @@ public class Show_text : MonoBehaviour {
 
     void LateUpdate()
     {
-        ShowMe = GameObject.FindGameObjectsWithTag("PopUp"); // постоянно обновляем информацию о том сколько объектов на сцене [УДАЛИТЬ ПОТОМ]
+       // ShowMe = GameObject.FindGameObjectsWithTag("PopUp"); // постоянно обновляем информацию о том сколько объектов на сцене [УДАЛИТЬ ПОТОМ]
 
         GameObject[] signs; //создаем переменную со списком объектов 
             signs = GameObject.FindGameObjectsWithTag("PopUp"); //все объекты с тегом PopUp чтобы попадали в этот список
