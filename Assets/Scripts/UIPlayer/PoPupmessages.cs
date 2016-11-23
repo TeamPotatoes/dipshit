@@ -22,7 +22,12 @@ public class PoPupmessages : MonoBehaviour
     }
 
 
+    void OnMouseDown(Collider GUI)
+    {
 
+
+
+    }
 
 
 
